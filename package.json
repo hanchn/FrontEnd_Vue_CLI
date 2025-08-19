@@ -16,7 +16,7 @@
 		"build:pre": "vite build --mode pre",
 		"build:prod": "vite build --mode prod",
 		"preview": "vite preview",
-		"route:generate": "node scripts/generateRoutes.js",
+		"router": "node scripts/generateRoutes.js",
 		"route:watch": "node scripts/generateRoutes.js --watch"
 	},
 	"dependencies": {
