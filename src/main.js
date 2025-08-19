@@ -12,6 +12,8 @@ EnvUtils.printEnvInfo()
 if (EnvUtils.isVConsoleEnabled()) {
   import('vconsole').then(({ default: VConsole }) => {
     new VConsole()
+  }).catch(err => {
+    console.warn('VConsole 加载失败，请安装 vconsole 依赖:', err)
   })
 }
 
