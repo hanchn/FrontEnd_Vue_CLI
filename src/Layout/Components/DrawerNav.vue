@@ -13,9 +13,27 @@
       <a-menu
         v-model:selectedKeys="selectedKeys"
         mode="inline"
-        :items="menuItems"
         @click="handleMenuClick"
-      />
+      >
+        <a-menu-item key="Home">
+          <template #icon>
+            <HomeOutlined />
+          </template>
+          首页
+        </a-menu-item>
+        <a-menu-item key="List">
+          <template #icon>
+            <UnorderedListOutlined />
+          </template>
+          列表页面
+        </a-menu-item>
+        <a-menu-item key="Form">
+          <template #icon>
+            <FormOutlined />
+          </template>
+          表单页面
+        </a-menu-item>
+      </a-menu>
     </div>
     
     <template #extra>
@@ -46,7 +64,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useRouter, useRoute } from 'vue-router'
 import { 
   MenuFoldOutlined, 
@@ -65,26 +83,12 @@ const visible = ref(true)
 // 当前选中的菜单项
 const selectedKeys = ref([route.name])
 
-// 菜单项配置
-const menuItems = computed(() => {
-  const routes = router.getRoutes()
-  return routes
-    .filter(route => route.name && route.path !== '/:pathMatch(.*)*') // 过滤掉404路由
-    .map(route => {
-      const icons = {
-        'Home': HomeOutlined,
-        'List': UnorderedListOutlined,
-        'Form': FormOutlined
-      }
-      
-      return {
-        key: route.name,
-        label: route.meta?.title || route.name,
-        icon: icons[route.name] || HomeOutlined,
-        path: route.path
-      }
-    })
-})
+// 路由映射
+const routeMap = {
+  'Home': '/',
+  'List': '/list',
+  'Form': '/form'
+}
 
 // 切换抽屉显示状态
 const toggleDrawer = () => {
@@ -92,10 +96,10 @@ const toggleDrawer = () => {
 }
 
 // 处理菜单点击
-const handleMenuClick = ({ key, item }) => {
-  const targetRoute = menuItems.value.find(menu => menu.key === key)
-  if (targetRoute && targetRoute.path !== route.path) {
-    router.push(targetRoute.path)
+const handleMenuClick = ({ key }) => {
+  const targetPath = routeMap[key]
+  if (targetPath && targetPath !== route.path) {
+    router.push(targetPath)
   }
 }
 
