@@ -1,17 +1,21 @@
-const RouteGenerator = require('./generateRoutes')
+import RouteGenerator from './generateRoutes.js'
 
 // Vite插件：自动路由生成
 function autoRoutePlugin() {
   let generator
-  let watcher
 
   return {
     name: 'auto-route-generator',
     
     buildStart() {
       // 构建开始时生成路由
-      generator = new RouteGenerator()
-      generator.generate()
+      try {
+        generator = new RouteGenerator()
+        generator.generate()
+        console.log('✅ 路由文件已生成')
+      } catch (error) {
+        console.error('❌ 路由生成失败:', error)
+      }
     },
     
     configureServer(server) {
@@ -39,4 +43,4 @@ function autoRoutePlugin() {
   }
 }
 
-module.exports = autoRoutePlugin
+export default autoRoutePlugin
