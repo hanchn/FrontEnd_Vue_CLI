@@ -435,7 +435,9 @@ config.addResponseInterceptor(async (response) => {
 export const request = new Request(config)
 export { Request, RequestConfig }
 
-// 兼容旧版本
+// 为了兼容性，导出 ServerApi
+export const ServerApi = request
+
 export const serverApi = {
   get: (url, params) => request.get(url, params),
   post: (url, data) => request.post(url, data),

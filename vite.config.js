@@ -23,9 +23,7 @@ export default defineConfig(({ mode }) => {
           rewrite: (path) => path.replace(/^\/api/, '')
         }
       }
-    },
-    optimizeDeps: {
-      exclude: ['crypto']
     }
+    // 移除了 optimizeDeps 配置
   }
 })
