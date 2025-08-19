@@ -4,10 +4,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 // 动态导入页面组件
+const Form = () => import('../Pages/Form/index.vue')
 const Home = () => import('../Pages/Home/index.vue')
 const List = () => import('../Pages/List/index.vue')
 
 const routes = [
+  {
+    path: '/form',
+    name: 'Form',
+    component: Form,
+    meta: {
+      title: 'Form'
+    }
+  },
   {
     path: '/',
     name: 'Home',
