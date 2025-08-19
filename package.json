@@ -7,8 +7,14 @@
 		"node": "^20.19.0 || >=22.12.0"
 	},
 	"scripts": {
-		"dev": "vite",
-		"build": "vite build",
+		"dev": "vite --mode dev",
+		"dev:test": "vite --mode test",
+		"dev:pre": "vite --mode pre",
+		"build": "vite build --mode prod",
+		"build:test": "vite build --mode test",
+		"build:dev": "vite build --mode dev",
+		"build:pre": "vite build --mode pre",
+		"build:prod": "vite build --mode prod",
 		"preview": "vite preview",
 		"route:generate": "node scripts/generateRoutes.js",
 		"route:watch": "node scripts/generateRoutes.js --watch"
